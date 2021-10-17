@@ -1,0 +1,16 @@
+{
+  "name": "zora-nft-tutorial",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ zora-nft-tutorial",
+    "create-local": "graph create --node http://localhost:8020/ zora-nft-tutorial",
+    "remove-local": "graph remove --node http://localhost:8020/ zora-nft-tutorial",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 zora-nft-tutorial"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.22.1",
+    "@graphprotocol/graph-ts": "0.22.1"
+  }
+}
