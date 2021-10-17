@@ -166,7 +166,7 @@ dataSources:
       startBlock: 11565020
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
         - Token
@@ -186,7 +186,7 @@ dataSources:
 
 ## Assemblyscript mappings
 
-Next, open __src/mappings.ts__ to write the mappings that we defined in our subgraph subgraph `eventHandlers`.
+Next, open __src/mappings.ts__ to write the mappings that we defined in our subgraph `eventHandlers`.
 
 Update the file with the following code:
 
@@ -226,14 +226,18 @@ export function handleTransfer(event: TransferEvent): void {
 
 export function handleTokenURIUpdated(event: TokenURIUpdatedEvent): void {
   let token = Token.load(event.params._tokenId.toString());
-  token.contentURI = event.params._uri;
-  token.save();
+  if(token){ 
+    token.contentURI = event.params._uri;
+    token.save();
+  }
 }
 
 export function handleTokenMetadataURIUpdated(event: TokenMetadataURIUpdatedEvent): void {
   let token = Token.load(event.params._tokenId.toString());
-  token.metadataURI = event.params._uri;
-  token.save();
+  if(token){
+    token.metadataURI = event.params._uri;
+    token.save();
+  }
 }
 ```
 
@@ -361,3 +365,5 @@ To learn how to do this, check out the tutorial [here](https://thegraph.com/blog
 
 Also check out the [Openzeppelin subgraph
 ](https://blog.openzeppelin.com/subgraphs-announcement/) and the repo [here](https://github.com/OpenZeppelin/openzeppelin-subgraphs).
+
+Workshop branched from https://github.com/dabit3/building-a-subgraph-workshop
