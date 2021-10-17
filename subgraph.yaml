@@ -1,4 +1,4 @@
-specVersion: 0.0.1
+specVersion: 0.0.2
 schema:
   file: ./schema.graphql
 dataSources:
@@ -8,24 +8,18 @@ dataSources:
     source:
       address: "0xabEFBc9fD2F806065b4f3C237d4b59D9A97Bcac7"
       abi: Token
+      startBlock: 11565020
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - Approval
-        - ApprovalForAll
-        - TokenMetadataURIUpdated
-        - TokenURIUpdated
-        - Transfer
+        - Token
+        - User
       abis:
         - name: Token
           file: ./abis/Token.json
       eventHandlers:
-        - event: Approval(indexed address,indexed address,indexed uint256)
-          handler: handleApproval
-        - event: ApprovalForAll(indexed address,indexed address,bool)
-          handler: handleApprovalForAll
         - event: TokenMetadataURIUpdated(indexed uint256,address,string)
           handler: handleTokenMetadataURIUpdated
         - event: TokenURIUpdated(indexed uint256,address,string)

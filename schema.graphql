@@ -1,34 +1,15 @@
-type Approval @entity {
+type Token @entity {
   id: ID!
-  owner: Bytes! # address
-  approved: Bytes! # address
-  tokenId: BigInt! # uint256
+  tokenID: BigInt!
+  contentURI: String!
+  metadataURI: String!
+  createdAtTimestamp: BigInt!
+  creator: User!
+  owner: User!
 }
 
-type ApprovalForAll @entity {
+type User @entity {
   id: ID!
-  owner: Bytes! # address
-  operator: Bytes! # address
-  approved: Boolean! # bool
-}
-
-type TokenMetadataURIUpdated @entity {
-  id: ID!
-  _tokenId: BigInt! # uint256
-  owner: Bytes! # address
-  _uri: String! # string
-}
-
-type TokenURIUpdated @entity {
-  id: ID!
-  _tokenId: BigInt! # uint256
-  owner: Bytes! # address
-  _uri: String! # string
-}
-
-type Transfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  tokenId: BigInt! # uint256
+  tokens: [Token!]! @derivedFrom(field: "owner")
+  created: [Token!]! @derivedFrom(field: "creator")
 }
